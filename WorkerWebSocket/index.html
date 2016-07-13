@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>&lt;webkit.org/b/159726&gt; Mixed content blocking is bypassed for WebSockets in Workers></title>
+    <style>
+        #container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .disabled {
+            display: none;
+        }
+
+        .result {
+            width: 100%;
+            text-align: center;
+        }
+
+        .pass {
+            color: green;
+        }
+
+        .fail {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div><input id="webWorkerCheckbox" type="checkbox">Use Web Workers</div>
+    <div><input id="useSecureCheckbox" type="checkbox">Use secure WebSocket</div>
+    <div><input id="button" type="button" value="Send WebSocket message"></div>
+    <div id="blocked" class="result disabled">Result: blocked</div>
+    <div id="notBlocked" class="result disabled">Result: not blocked</div>
+</div>
+<script src="websocket.js"></script>
+<script type="text/javascript">
+    var button = document.getElementById("button");
+    button.addEventListener("click", function (event) {
+        var blocked = document.getElementById("blocked");
+        blocked.classList.add("disabled");
+
+        var notBlocked = document.getElementById("notBlocked");
+        notBlocked.classList.add("disabled");
+
+        var useSecure = document.getElementById("useSecureCheckbox").checked;
+        var useWorker = document.getElementById("webWorkerCheckbox").checked;
+        pingWebSocket(useSecure, useWorker).then(function () {
+            var result = useSecure ? notBlocked : blocked;
+            result.classList.remove("fail");
+            result.classList.add("pass");
+            result.classList.remove("disabled");
+        }, function () {
+            var result = useSecure ? blocked : notBlocked;
+            result.classList.remove("pass");
+            result.classList.add("fail");
+            result.classList.remove("disabled");
+        });
+    });
+</script>
+</body>
+</html>
