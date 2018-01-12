@@ -6,6 +6,14 @@
 	document.body.style['color'] = '#414b56';
     document.title = "Payment Request API"
 	
+	var title = document.createElement('h3');
+	title.innerText = "Payment Request API Demo";
+	title.style['position'] = 'absolute';
+    title.style['top'] = '50%';
+    title.style['left'] = '50%';
+    title.style['transform'] = 'translate(-50%, -1000%)';
+	document.body.appendChild(title);
+	
 	var text = document.createElement('div');
 	text.innerText = "Sunglasses — $95.00";
 	text.style['position'] = 'absolute';
@@ -87,7 +95,7 @@
             label: "Total",
             amount: {
                 currency: "USD",
-                value: "100.00",
+                value: "108.08",
             },
         };
     
@@ -124,6 +132,13 @@
                 amount: {
                     currency: "USD",
                     value: "5.00",
+                }
+            },
+            {
+                label: "Tax",
+                amount: {
+                    currency: "USD",
+                    value: "8.08",
                 }
             },
         ];
@@ -167,10 +182,10 @@
             var totalValue;
             if (request.shippingOption === 'ground') {
                 shippingValue = '5.00';
-                totalValue = '100.00';
+                totalValue = '108.08';
             } else {
                 shippingValue = '10.00';
-                totalValue = '105.00';
+                totalValue = '113.08';
             }
 
             const displayItems = [
@@ -188,6 +203,13 @@
                         value: shippingValue,
                     }
                 },
+	            {
+	                label: "Tax",
+	                amount: {
+	                    currency: "USD",
+	                    value: "8.08",
+	                }
+	            },
             ];
 
             event.updateWith({
