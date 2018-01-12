@@ -6,7 +6,7 @@
 	document.body.style['color'] = '#414b56';
     document.title = "Payment Request API"
 	
-	var title = document.createElement('h3');
+	var title = document.createElement('h1');
 	title.innerText = "Payment Request API Demo";
 	title.style['position'] = 'absolute';
     title.style['top'] = '50%';
