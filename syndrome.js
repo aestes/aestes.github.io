@@ -81,9 +81,6 @@
 		
 		const basicCardMethod = {
 			supportedMethods: "basic-card",
-			data: {
-				supportedNetworks: ["visa", "mastercard"],
-			},
 		};
     
         var total = {
