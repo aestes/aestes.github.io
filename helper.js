@@ -6,13 +6,9 @@
 	document.body.style['color'] = '#414b56';
     document.title = "Payment Request API"
 	
-		var title = document.createElement('h1');
-	title.innerText = "Payment Request API Demo";
+	var title = document.createElement('em');
+	title.innerText = "SUNGLASS SHANTY"
 	title.style['position'] = 'absolute';
-    title.style['top'] = '50%';
-    title.style['left'] = '50%';
-    title.style['transform'] = 'translate(-50%, -1000%)';
-	title.style['visibility'] = 'hidden';
 	document.body.appendChild(title);
 	
 	var text = document.createElement('div');
