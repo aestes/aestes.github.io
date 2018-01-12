@@ -6,11 +6,6 @@
 	document.body.style['color'] = '#414b56';
     document.title = "Payment Request API"
 	
-	var title = document.createElement('em');
-	title.innerText = "SUNGLASS SHANTY"
-	title.style['position'] = 'absolute';
-	document.body.appendChild(title);
-	
 	var text = document.createElement('div');
 	text.innerText = "Sunglasses — $95.00";
 	text.style['position'] = 'absolute';
