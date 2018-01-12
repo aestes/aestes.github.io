@@ -12,7 +12,7 @@
     title.style['top'] = '50%';
     title.style['left'] = '50%';
     title.style['transform'] = 'translate(-50%, -1000%)';
-	title.style['visibility'] = 'invisible';
+	title.style['visibility'] = 'hidden';
 	document.body.appendChild(title);
 	
 	var text = document.createElement('div');
