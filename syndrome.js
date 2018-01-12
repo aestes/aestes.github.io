@@ -68,142 +68,31 @@
     
     function createRequest()
     {
-        const applePayMethod = {
-            supportedMethods: "https://apple.com/apple-pay",
-            data: {
-                version: 3,
-                merchantIdentifier: "com.apple.merchant",
-                merchantCapabilities: ["supports3DS"],
-                supportedNetworks: ["visa", "masterCard"],
-                countryCode: "US",
-            },
-        };
-		
-		const basicCardMethod = {
-			supportedMethods: "basic-card",
-		};
-    
-        var total = {
-            label: "Total",
-            amount: {
-                currency: "USD",
-                value: "10.00",
-            },
-        };
-    
-        const shippingOptions = [
-            {
-                id: "ground",
-                label: "Ground Shipping",
-                amount: {
-                    currency: "USD",
-                    value: "5.00",
-                },
-                selected: true,
-            },
-            {
-                id: "express",
-                label: "Express Shipping",
-                amount: {
-                    currency: "USD",
-                    value: "10.00",
-                },
-            },
-        ];
-    
-        const displayItems = [
-            {
-                label: "T-shirt",
-                amount: {
-                    currency: "USD",
-                    value: "5.00",
-                }
-            },
-            {
-                label: "Shipping",
-                amount: {
-                    currency: "USD",
-                    value: "5.00",
-                }
-            },
-        ];
+        let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
+      'visa', 'mir'];
+  let types = ['debit', 'credit', 'prepaid'];
+  let supportedInstruments = [{
+    supportedMethods: networks,
+  }, {
+    supportedMethods: ['basic-card'],
+    data: {supportedNetworks: networks, supportedTypes: types},
+  }];
 
-        const details = {
-            total,
-            displayItems,
-            shippingOptions,
-        };
+  let details = {
+    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    displayItems: [
+      {
+        label: 'Original donation amount',
+        amount: {currency: 'USD', value: '65.00'},
+      },
+      {
+        label: 'Friends and family discount',
+        amount: {currency: 'USD', value: '-10.00'},
+      },
+    ],
+  };
 
-        const options = {
-            requestPayerName: true,
-            requestPayerEmail: true,
-            requestPayerPhone: true,
-            requestShipping: true,
-        };
-
-        var request = new PaymentRequest([applePayMethod, basicCardMethod], details, options);
-
-        window.completeMerchantValidation = (event, merchantSession) => {
-            event.complete(merchantSession);
-        };
-
-        request.onapplepayvalidatemerchant = (event) => {
-            callStartSession(request, event);
-        };
-
-        request.onapplepaypaymentmethodchanged = (event) => {
-            event.updateWith({ total, shippingOptions, displayItems });
-        };
-
-        request.onshippingaddresschange = (event) => {
-            if (request.shippingAddress.postalCode === '95014')
-                event.updateWith({ error: "Cannot ship to postal code 95014" });
-            else
-                event.updateWith({ total, shippingOptions, displayItems });
-        };
-
-        request.onshippingoptionchange = (event) => {
-            var shippingValue;
-            var totalValue;
-            if (request.shippingOption === 'ground') {
-                shippingValue = '5.00';
-                totalValue = '10.00';
-            } else {
-                shippingValue = '10.00';
-                totalValue = '15.00';
-            }
-
-            const displayItems = [
-                {
-                    label: "T-shirt",
-                    amount: {
-                        currency: "USD",
-                        value: "5.00",
-                    }
-                },
-                {
-                    label: "Shipping",
-                    amount: {
-                        currency: "USD",
-                        value: shippingValue,
-                    }
-                },
-            ];
-
-            event.updateWith({
-                total: {
-                    label: "Total",
-                    amount: {
-                        currency: "USD",
-                        value: totalValue,
-                    },
-                },
-                shippingOptions,
-                displayItems,
-            });
-        };
-        
-        return request;
+  return new PaymentRequest(supportedInstruments, details);
     }
 
     button.onclick = () => createRequest().show().then(response => response.complete("success"));
