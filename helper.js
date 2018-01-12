@@ -87,7 +87,7 @@
             label: "Total",
             amount: {
                 currency: "USD",
-                value: "10.00",
+                value: "100.00",
             },
         };
     
@@ -113,10 +113,10 @@
     
         const displayItems = [
             {
-                label: "T-shirt",
+                label: "Sunglasses",
                 amount: {
                     currency: "USD",
-                    value: "5.00",
+                    value: "95.00",
                 }
             },
             {
@@ -167,18 +167,18 @@
             var totalValue;
             if (request.shippingOption === 'ground') {
                 shippingValue = '5.00';
-                totalValue = '10.00';
+                totalValue = '100.00';
             } else {
                 shippingValue = '10.00';
-                totalValue = '15.00';
+                totalValue = '105.00';
             }
 
             const displayItems = [
                 {
-                    label: "T-shirt",
+                    label: "Sunglasses",
                     amount: {
                         currency: "USD",
-                        value: "5.00",
+                        value: "95.00",
                     }
                 },
                 {
