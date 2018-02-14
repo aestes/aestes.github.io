@@ -72,7 +72,7 @@
 				supportedMethods: "https://apple.com/apple-pay",
 	            data: {
 					version: 3,
-					merchantIdentifier: "com.apple.merchant",
+					merchantIdentifier: "merchant.com.frameworksqa.syndromeweb.ecc-staging",
 					merchantCapabilities: ["supports3DS"],
 					supportedNetworks: ["visa", "masterCard"],
 					countryCode: "US",
