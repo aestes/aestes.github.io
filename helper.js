@@ -196,87 +196,11 @@
         };
 
         request.onshippingaddresschange = (event) => {
-            if (request.shippingAddress.postalCode === '95014')
-                event.updateWith({ error: "Cannot ship to postal code 95014" });
-            else
-                event.updateWith({ total, displayItems, shippingOptions, modifiers });
+            event.updateWith(paymentDetails());
         };
 
         request.onshippingoptionchange = (event) => {
-            var shippingValue;
-            var totalValue;
-            var overrideTotalValue;
-            if (request.shippingOption === 'ground') {
-                shippingValue = '5.00';
-                totalValue = '108.08';
-                overrideTotalValue = '110.08';
-            } else {
-                shippingValue = '10.00';
-                totalValue = '113.08';
-                overrideTotalValue = '115.08';
-            }
-
-            const displayItems = [
-                {
-                    label: "Sunglasses",
-                    amount: {
-                        currency: "USD",
-                        value: "95.00",
-                    }
-                },
-                {
-                    label: "Shipping",
-                    amount: {
-                        currency: "USD",
-                        value: shippingValue,
-                    }
-                },
-                {
-                    label: "Tax",
-                    amount: {
-                        currency: "USD",
-                        value: "8.08",
-                    }
-                },
-            ];
-
-            const modifiers = [
-                {
-                    supportedMethods: "https://apple.com/apple-pay",
-                    total: {
-                        label: "Total",
-                        amount: {
-                            currency: "USD",
-                            value: overrideTotalValue,
-                        },
-                    },
-                    additionalDisplayItems: [
-                        {
-                            label: "Credit surcharge",
-                            amount: {
-                                currency: "USD",
-                                value: "2.00",
-                            },
-                        },
-                    ],
-                    data: {
-                        paymentMethodType: "credit",
-                    },
-                },
-            ];
-
-            event.updateWith({
-                total: {
-                    label: "Total",
-                    amount: {
-                        currency: "USD",
-                        value: totalValue,
-                    },
-                },
-                shippingOptions,
-                displayItems,
-                modifiers,
-            });
+			event.updateWith(paymentDetails());
         };
         
         return request;
