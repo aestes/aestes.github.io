@@ -66,24 +66,32 @@
 
     document.body.appendChild(startSessionEnvironment);
     
-    function createRequest()
+    function paymentMethods()
     {
-        const applePayMethod = {
-            supportedMethods: "https://apple.com/apple-pay",
-            data: {
-                version: 3,
-                merchantIdentifier: "com.apple.merchant",
-                merchantCapabilities: ["supports3DS"],
-                supportedNetworks: ["visa", "masterCard"],
-                countryCode: "US",
-            },
-        };
-
-        const basicCardMethod = {
-            supportedMethods: "basic-card",
-        };
-
-        var total = {
+    	return [
+    		{
+				supportedMethods: "https://apple.com/apple-pay",
+	            data: {
+					version: 3,
+					merchantIdentifier: "com.apple.merchant",
+					merchantCapabilities: ["supports3DS"],
+					supportedNetworks: ["visa", "masterCard"],
+					countryCode: "US",
+	            },
+    		},
+    		{
+				supportedMethods: "basic-card",
+				data: {
+					supportedNetworks: ["visa", "masterCard"],
+					supportedTypes: ["credit", "debit", "prepaid"],
+				},
+    		},
+    	];
+    }
+    
+    function paymentDetails()
+    {
+		const total = {
             label: "Total",
             amount: {
                 currency: "USD",
@@ -160,21 +168,27 @@
             },
         ];
 
-        const details = {
+        return {
             total,
             displayItems,
             shippingOptions,
             modifiers,
         };
+    }
 
-        const options = {
+    function paymentOptions()
+    {
+        return {
             requestPayerName: true,
             requestPayerEmail: true,
             requestPayerPhone: true,
             requestShipping: true,
         };
+    }
 
-        var request = new PaymentRequest([basicCardMethod, applePayMethod], details, options);
+    function createRequest()
+    {
+        var request = new PaymentRequest(paymentMethods(), paymentDetails(), paymentOptions());
 
         window.completeMerchantValidation = (event, merchantSession) => {
             event.complete(merchantSession);
