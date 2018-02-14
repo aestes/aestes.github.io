@@ -66,8 +66,7 @@
 
     document.body.appendChild(startSessionEnvironment);
     
-    function paymentMethods()
-    {
+    paymentMethods = () => {
     	return [
     		{
 				supportedMethods: "https://apple.com/apple-pay",
@@ -89,8 +88,7 @@
     	];
     }
     
-    function paymentDetails()
-    {
+    paymentDetails = () => {
 		const total = {
             label: "Total",
             amount: {
@@ -176,8 +174,7 @@
         };
     }
 
-    function paymentOptions()
-    {
+    paymentOptions = () => {
         return {
             requestPayerName: true,
             requestPayerEmail: true,
