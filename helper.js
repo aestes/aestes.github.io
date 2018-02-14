@@ -206,5 +206,7 @@
         return request;
     }
 
-    button.onclick = () => createRequest().show().then(response => response.complete("success"));
+    button.onclick = () => createRequest().show().then((response) => {
+	    response.complete("success");
+    });
 })();
