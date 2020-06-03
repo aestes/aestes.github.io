@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>upload test</title>
+</head>
+
+<body>
+    <input type="file" id="file-input" />
+    <script>
+        const fileInput = document.querySelector('#file-input');
+        fileInput.addEventListener('change', (evt) => {
+            // from bootstrap-vue's form-file.js
+            fileInput.type = '';
+        });
+    </script>
+</body>
+
+</html>
