@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>[Apple Pay] Test navigating the main frame during an active session</title>
+    <style>
+        #apple-pay {
+            -webkit-appearance: -apple-pay-button;
+        }
+    </style>
+    <script>
+        const buttonClicked = () => {
+            const session = new ApplePaySession(3, {
+                merchantCapabilities: ["supports3DS"],
+                supportedNetworks: ["visa", "masterCard"],
+                countryCode: "US",
+                total: { label: "Total", amount: "0.99" },
+                currencyCode: "USD"
+            });
+
+            session.addEventListener('validatemerchant', (event) => {
+                alert(event.validationURL);
+                session.abort();
+            });
+        };
+
+        window.addEventListener('load', () => {
+            document.querySelector('#apple-pay').addEventListener('click', buttonClicked);
+        });
+    </script>
+</head>
+<body>
+    <button id='apple-pay'></button>
+</body>
+</html>
