@@ -23,6 +23,8 @@
                 alert(event.validationURL);
                 session.abort();
             });
+
+            session.begin();
         };
 
         window.addEventListener('load', () => {
