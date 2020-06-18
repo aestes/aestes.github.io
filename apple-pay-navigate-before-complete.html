@@ -20,8 +20,7 @@
             });
 
             session.addEventListener('validatemerchant', (event) => {
-                alert(event.validationURL);
-                session.abort();
+                window.location = 'https://www.apple.com';
             });
 
             session.begin();
