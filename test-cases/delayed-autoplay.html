@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<script>
+	setTimeout(() => {
+		const video = document.createElement('video');
+		video.src = 'test-pattern.mp4';
+		video.controls = true;
+		video.autoplay = true;
+		video.width = 1024;
+		video.height = 768;
+		document.body.appendChild(video);
+	}, 5000);
+</script>
